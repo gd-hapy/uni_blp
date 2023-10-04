@@ -1,0 +1,1 @@
+<view><view class="currentTime">{{currentTime+''}}</view><view class="currentDate">{{currentDate}}</view></view>

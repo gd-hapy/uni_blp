@@ -1,0 +1,1 @@
+.searchResult-contain{display:flex;flex-direction:row;justify-content:flex-start;align-items:flex-end;flex-wrap:wrap}.searchResult_title{color:#a7e9c3;text-align:center;width:100%;font-weight:700;margin-top:20px}.searchResult-list{color:#90ee90;margin:20px 30px 0;border:1px solid #90ee90;align-items:center;display:flex}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "custom-tag": "/src/components/CustomHotSearch/CustomTag",
+    "loading": "/src/components/CustomLoading/CustomLoading"
+  }
+}

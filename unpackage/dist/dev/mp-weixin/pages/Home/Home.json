@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "custom-time": "/src/components/CustomTime/CustomTime",
+    "custom-search-bar": "/src/components/CustomSearchBar/CustomSearchBar",
+    "custom-hot-search": "/src/components/CustomHotSearch/CustomHotSearch",
+    "custom-view": "/src/components/CustomView/CustomView",
+    "loading": "/src/components/CustomLoading/CustomLoading"
+  }
+}
