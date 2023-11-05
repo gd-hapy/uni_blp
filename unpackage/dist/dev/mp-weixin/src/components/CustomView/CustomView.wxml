@@ -1,1 +1,1 @@
-<view class="customViewContain"><view class="preText" style="{{'color:'+(preTextColor)+';'}}">{{preText}}</view><view data-event-opts="{{[['tap',[['clickHandle',['$event']]]]]}}" class="subText" style="{{'color:'+(subTextColor)+';'}}" bindtap="__e">{{subText}}</view></view>
+<view class="custom-viewContain"><view class="preText" style="{{'color:'+(preTextColor)+';'}}">{{preText}}</view><view data-event-opts="{{[['tap',[['clickHandle',['$event']]]]]}}" class="subText" style="{{'color:'+(subTextColor)+';'}}" bindtap="__e">{{subText}}</view></view>

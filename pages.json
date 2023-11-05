@@ -1,12 +1,15 @@
 {
+	// "easycom": {
+	// 	// "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue",
+	// 	"autoscan": true,
+	// 	"custom": {
+	// 		// uni-ui 规则如下配置
+	// 		// "^uni-(.*)": "uni_modules/uni-$1/components/uni-$1/uni-$1.vue",
+	// 		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	// 	}
+	// },
 	"easycom": {
-		// "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue",
-		"autoscan": true,
-		"custom": {
-			// uni-ui 规则如下配置
-			"^uni-(.*)": "uni_modules/uni-$1/components/uni-$1/uni-$1.vue",
-			"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
-		}
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		// {
@@ -27,14 +30,16 @@
 			"path": "pages/SearchResults/SearchResults",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "white"
 			}
 
 		}, {
 			"path": "pages/VideoPlayer/VideoPlayer",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 
 		}
@@ -42,7 +47,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#000000",
 		"backgroundColor": "#F8F8F8"
 	},
 	"uniIdRouter": {}

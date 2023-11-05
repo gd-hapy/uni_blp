@@ -363,7 +363,7 @@ export default {
 .u-drawer__scroll-view {
 	width: 100%;
 	height: 100%;
-	margin-top: 50px;
+	margin-top: 40px;
 	height:-webkit-calc(100% - 50px); 
 	height:-moz-calc(100% - 50px); 
 	height:calc(100% - 50px); 
@@ -458,9 +458,4 @@ export default {
 	right: 30rpx;
 	bottom: 30rpx;
 }
-	.uni-scroll-view .uni-scroll-view-content {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-	}
 </style>

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "custom-tag": "/src/components/CustomHotSearch/CustomTag",
     "loading": "/src/components/CustomLoading/CustomLoading"

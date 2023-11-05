@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.CustomHotSearch {
+.custom-hotSearch {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -32,11 +32,11 @@
   flex-wrap: wrap;
   margin: 30px;
 }
-.Custom-preText {
+.custom-preText {
   color: LightGreen;
 }
 .tag-view {
-  margin-right: 10px;
-  margin-top: 5px;
+  margin-right: 15px;
+  margin-top: 25px;
 }
 

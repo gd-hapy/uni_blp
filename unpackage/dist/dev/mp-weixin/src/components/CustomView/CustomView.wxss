@@ -24,15 +24,17 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.customViewContain {
+.custom-viewContain {
   display: flex;
   margin: 20px 20px 0 20px;
 }
 .preText {
-  font-size: 16px;
+  margin-top: 15px;
   white-space: nowrap;
 }
 .subText {
   text-align: center;
+  margin-top: 15px;
+  margin-left: 5px;
 }
 

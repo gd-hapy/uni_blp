@@ -36,7 +36,7 @@
   position: fixed;
   margin-top: 50px;
   align-items: center;
-  z-index: 999999;
+  z-index: 999;
 }
 .loginLoading .loading-img.data-v-a2307f32 {
   width: 300rpx;

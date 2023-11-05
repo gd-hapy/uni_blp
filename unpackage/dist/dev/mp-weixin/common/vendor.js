@@ -11935,16 +11935,13 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
 var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 64));
+var _url = __webpack_require__(/*! ../config/url */ 65);
 _vue.default.use(_vuex.default);
-
-//	https://jx.qqwtt.com/
-//	https://movie.heheda.top/
-// 	https://www.pouyun.com/
 var state = {
   //要设置的全局访问的state对象
   loading: false,
   // 是否正在刷新
-  base_url: '' // 当前base_url
+  base_url: _url.kBASE_URL_JX0 // 当前base_url
 };
 
 var store = new _vuex.default.Store({
@@ -13210,13 +13207,436 @@ module.exports = index_cjs;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 65 */,
-/* 66 */,
-/* 67 */,
+/* 65 */
+/*!*************************************************************************!*\
+  !*** /Users/apple/Documents/HBuilderProjects/uni_blp/src/config/url.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.kBASE_URL_JX4 = exports.kBASE_URL_JX3 = exports.kBASE_URL_JX2 = exports.kBASE_URL_JX1 = exports.kBASE_URL_JX0 = void 0;
+exports.url_base_url = url_base_url;
+exports.url_change_baseUrl = url_change_baseUrl;
+exports.url_home_url = url_home_url;
+exports.url_searchResults_url = url_searchResults_url;
+exports.url_videoPlayer_url = url_videoPlayer_url;
+exports.url_video_parse_url = url_video_parse_url;
+exports.url_video_parse_url_back = url_video_parse_url_back;
+var _util = _interopRequireDefault(__webpack_require__(/*! ./util.js */ 66));
+var _utils = __webpack_require__(/*! ../utils/utils.js */ 67);
+var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 63));
+// module.exports = {
+//   //开发环境
+//   develop: {
+// 	VIDEO_SEARCH_URL: "https://vip.bljiex.com/api.php?out=jsonp&wd=",
+// 	SUFFIX_URL: "cb="+util.customParam_CB()+"&_="+util.timestamp(),
+// 	VIDEO_INFO_URL: "https://vip.bljiex.com/api.php?out=jsonp&flag=0&id="
+//   },
+//   //线上环境
+//   release: {
+// 	VIDEO_SEARCH_URL: "https://vip.bljiex.com/api.php?",
+// 	SUFFIX_URL: "cb="+util.customParam_CB()+"&_="+util.timestamp(),
+// 	VIDEO_INFO_URL: "https://vip.bljiex.com/api.php?out=jsonp&flag=0&id="
+//   }
+// }
+
+//	https://jx.qqwtt.com/
+//	https://movie.heheda.top/
+// 	https://www.pouyun.com/
+// 	https://vip.bljiex.com/   需要Referer
+// 	http://vip.momobiji.com/
+// 	https://parse.kbcms.net/
+/* 解析url */
+var kBASE_URL_JX0 = 'https://jx.qqwtt.com/';
+exports.kBASE_URL_JX0 = kBASE_URL_JX0;
+var kBASE_URL_JX1 = 'https://movie.heheda.top/';
+exports.kBASE_URL_JX1 = kBASE_URL_JX1;
+var kBASE_URL_JX2 = 'https://www.pouyun.com/';
+exports.kBASE_URL_JX2 = kBASE_URL_JX2;
+var kBASE_URL_JX3 = 'https://parse.kbcms.net/';
+exports.kBASE_URL_JX3 = kBASE_URL_JX3;
+var kBASE_URL_JX4 = 'http://vip.momobiji.com/';
+
+/* 视频播放解析url */
+exports.kBASE_URL_JX4 = kBASE_URL_JX4;
+var _url_video_parse_url = 'https://json.vipjx.cnow.eu.org/?url=';
+var _url_video_parse_url_back = 'https://json.2s0.cn:5678/home/api?type=ys&uid=1359749&key=hinotvxHIKMNSXY034&url=';
+function _customParam() {
+  return '&cb=' + (0, _utils.utils_customParam_CB)() + '&_=' + (0, _utils.utils_timestamp)();
+}
+
+/* 切换 */
+function url_change_baseUrl() {
+  var arr = [kBASE_URL_JX0, kBASE_URL_JX1, kBASE_URL_JX2, kBASE_URL_JX3, kBASE_URL_JX4];
+  var tm = _index.default;
+  var base_url = _index.default.state.base_url;
+  var index = arr.indexOf(base_url);
+  var cc = (index += 1) % arr.length;
+  tm.state.base_url = arr[cc];
+  console.log('切换到：' + tm.state.base_url);
+}
+function url_base_url() {
+  var tm = _index.default;
+  return tm.state.base_url;
+}
+function url_home_url() {
+  // url_change_baseUrl()
+  // return 'so.php'
+  return 'https://vip.bljiex.com/so.php';
+}
+function url_searchResults_url(keyWords) {
+  return 'api.php?out=jsonp&wd=' + keyWords + _customParam();
+}
+function url_videoPlayer_url(flag, id) {
+  return 'api.php?out=jsonp&flag=' + flag + '&id=' + id + _customParam();
+}
+function url_video_parse_url(url) {
+  return _url_video_parse_url + url;
+}
+function url_video_parse_url_back(url) {
+  return _url_video_parse_url_back + url;
+}
+
+/***/ }),
+/* 66 */
+/*!**************************************************************************!*\
+  !*** /Users/apple/Documents/HBuilderProjects/uni_blp/src/config/util.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function timestamp() {
+  var date = String(Date.parse(new Date()));
+  return date;
+}
+function randomNum(n) {
+  var res = "";
+  for (var i = 0; i < n; i++) {
+    res += Math.floor(Math.random() * 10);
+  }
+  return res;
+}
+function randomStr() {
+  return randomNum(16);
+}
+function customParam_CB() {
+  // jQuery1820604137838421327_1694427293490
+  return "jQuery182" + randomStr() + "_" + timestamp();
+}
+module.exports = {
+  timestamp: timestamp,
+  customParam_CB: customParam_CB
+};
+
+/***/ }),
+/* 67 */
+/*!**************************************************************************!*\
+  !*** /Users/apple/Documents/HBuilderProjects/uni_blp/src/utils/utils.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.str_to_json = str_to_json;
+exports.utils_customParam_CB = utils_customParam_CB;
+exports.utils_hasChinese = utils_hasChinese;
+exports.utils_isAllChinese = utils_isAllChinese;
+exports.utils_parseHtml_to_hotSearch = utils_parseHtml_to_hotSearch;
+exports.utils_parseHtml_to_rankList100 = utils_parseHtml_to_rankList100;
+exports.utils_platform = utils_platform;
+exports.utils_timestamp = utils_timestamp;
+function str_to_json(res) {
+  debugger;
+  if (!res || typeof res !== 'string') return;
+  // handle str to json
+  var dataStr = "{" + res.split('({')[1].split('})')[0] + "}";
+  return result = JSON.parse(dataStr);
+}
+
+// export function handleLoading(this) {
+// 	debugger
+// 	this.$store.state.loading = false
+// }
+
+function utils_platform() {
+  var native;
+  var p = navigator.platform;
+  var u = navigator.userAgent;
+  var is_android = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
+  var is_ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+  if (p == "Win32" || p == "Win64" || p == "MacPPC" || p == "MacIntel" || p == "X11" || p == "Linux i686") {
+    //PC调试环境
+    console.log('PC环境--供PC端调试');
+    // native = new EmptyNative();
+  } else {
+    if (is_android) {
+      //Android终端
+      console.log('Mobile环境--Android移动端');
+      // native = new AndroidNative();
+    } else if (is_ios) {
+      //IOS终端
+      console.log('Mobile环境--IOS移动端');
+      // native = new IOSNative();
+    }
+  }
+  // export default native;
+}
+
+/* 解析 获取热门搜索 */
+function utils_parseHtml_to_hotSearch(html) {
+  // debugger
+  var arrayA = html.match(/<a[^>]*>([\s\S]*?)<\/a>/g);
+  var results = [];
+  if (arrayA && arrayA.length > 0) {
+    results = arrayA.map(function (item) {
+      var array = item.match(/<a[^>]*>([\s\S]*?)<\/a>/);
+      return array[1];
+    });
+  }
+  var index_ = results.indexOf('更多...');
+  var index = results.indexOf('更多');
+  var curIndex = 10;
+  if (index_ != -1) {
+    curIndex = index_ + 1;
+  }
+  if (index != -1) {
+    curIndex = index + 1;
+  }
+  return results.slice(0, curIndex);
+}
+
+/* 解析 获取排行榜100 */
+function utils_parseHtml_to_rankList100(html) {
+  var arr = html.split('title=\"');
+  // debugger
+  var that = this;
+  var result = arr.map(function (item) {
+    var subArr = item.split('\";');
+    return subArr[0];
+  });
+  return result.slice(1);
+}
+
+/* 判断字符串是否包含中文 */
+function utils_hasChinese(str) {
+  return /[\u4E00-\u9FA5]+/g.test(str);
+}
+
+/* 判断字符串是否全是中文 */
+function utils_isAllChinese(str) {
+  return /^[\u4E00-\u9FA5]+$/.test(str);
+}
+function utils_timestamp() {
+  var date = String(Date.parse(new Date()));
+  return date;
+}
+function randomNum(n) {
+  var res = "";
+  for (var i = 0; i < n; i++) {
+    res += Math.floor(Math.random() * 10);
+  }
+  return res;
+}
+function randomStr() {
+  return randomNum(16);
+}
+function utils_customParam_CB() {
+  // jQuery1820604137838421327_1694427293490
+  return "jQuery182" + randomStr() + "_" + utils_timestamp();
+}
+
+/***/ }),
 /* 68 */,
 /* 69 */,
 /* 70 */,
-/* 71 */
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */
+/*!************************************************************************!*\
+  !*** /Users/apple/Documents/HBuilderProjects/uni_blp/src/api/axios.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ 75));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 63));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+// const {
+// 	develop,
+// 	release
+// } = require('@/config/url.js');
+
+// import cusHeader from '../config/requestConfig.js'
+
+//根据环境变量获取api地址
+// https://vip.bljiex.com/api.php?out=jsonp&wd=%E5%85%89%E8%8D%A3%E6%97%B6%E4%BB%A3&cb=jQuery182044584402530265166_1694427316382&_=1694427316386
+// let url11 = develop.VIDEO_SEARCH_URL + "%E5%85%89%E8%8D%A3%E6%97%B6%E4%BB%A3" + develop.SUFFIX_URL;
+// https://vip.bljiex.com/api.php?out=jsonp&flag=3&id=16041&_=1693991493204
+
+// https://jx.qqwtt.com/api.php?out=jsonp&wd=%E6%96%97%E7%BD%97%E5%A4%A7%E9%99%86&cb=jQuery18208780301663630536_1696307237202&_=1696307237233
+//	https://jx.qqwtt.com/
+//	https://movie.heheda.top/
+// 	https://www.pouyun.com/
+var tm = _index.default;
+var baseURL = tm.state.base_url; //'https://movie.heheda.top/'//'api/'///'https://jx.qqwtt.com/'//api/'//https://jx.qqwtt.com/'//process.env.HOST + process.env.PORT && Number(process.env.PORT)// window.location.origin //'http://localhost:8082'
+// url: 'xiaomi.php?out=jsonp&wd=%E5%85%89%E8%8D%A3%E6%97%B6%E4%BB%A3',
+
+// axios.defaults.adapter = function(config) {
+// 	return new Promise((resolve, reject) => {
+// 		var settle = require('../../node_modules/axios/lib/core/settle');
+// 		var buildURL = require('../../node_modules/axios/lib/helpers/buildURL');
+// 		uni.request({
+// 			method: config.method.toUpperCase(),
+// 			url: buildURL(config.url, config.params, config.paramsSerializer),
+// 			header: config.headers,
+// 			data: config.data,
+// 			dataType: config.dataType,
+// 			responseType: config.responseType,
+// 			sslVerify: config.sslVerify,
+// 			complete: function complete(response) {
+// 				response = {
+// 					data: response.data,
+// 					status: response.statusCode,
+// 					errMsg: response.errMsg,
+// 					header: response.header,
+// 					config: config
+// 				};
+// 				settle(resolve, reject, response);
+// 			}
+// 		})
+// 	})
+// }
+console.log("baseURL:", baseURL, "++++++++++++++++++++++++");
+// axios.defaults.adapter = require('axios/lib/adapters/xhr');
+var HttpRequest = /*#__PURE__*/function () {
+  function HttpRequest() {
+    (0, _classCallCheck2.default)(this, HttpRequest);
+    this.baseURL = baseURL; // 从环境变量中获取api地址
+    this.timeout = 300000;
+  }
+  (0, _createClass2.default)(HttpRequest, [{
+    key: "mergeOptions",
+    value: function mergeOptions(options) {
+      return _objectSpread({
+        baseURL: baseURL,
+        timeout: 300000
+      }, options);
+    }
+  }, {
+    key: "request",
+    value: function request(options) {
+      var instance = _axios.default.create();
+      this.setInterceptors(instance);
+      var opts = this.mergeOptions(options);
+      return instance(opts);
+    }
+  }, {
+    key: "get",
+    value: function get(url) {
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var outHeaders = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      // console.log(data, "data+++++++++++++");
+      // debugger
+      // let _url = 'api/' + encodeURI(url)
+      // this.baseURL = tm.state.base_url
+      var _url = encodeURI(url);
+      console.log('axios->requestUrl:', _url, tm.state.base_url);
+      return this.request({
+        dataType: "json",
+        method: "get",
+        url: _url,
+        params: _objectSpread({}, data),
+        // get参数可以直接展开
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          'Access-Control-Allow-Origin': '*'
+          // 'Content-Type':'application/x-www-form-urlencoded'
+        }
+      });
+    }
+  }, {
+    key: "post",
+    value: function post(url) {
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var outHeaders = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      // 请求体中 {}
+      // debugger
+      var _url = encodeURI(url);
+      return this.request({
+        method: "post",
+        url: _url,
+        data: data,
+        // post要求必须传入data属性
+        headers: {}
+      });
+    }
+    // 设置拦截器
+  }, {
+    key: "setInterceptors",
+    value: function setInterceptors(instance) {
+      // 请求拦截器
+      instance.interceptors.request.use(function (config) {
+        // config.withCredentials = true;
+        // uni.showLoading({
+        // 	title: '加载中...'
+        // })
+
+        config.headers['Access-Control-Allow-Origin'] = '*';
+        config.headers = _objectSpread({}, config.headers);
+        return config;
+      });
+      // 响应拦截器
+      instance.interceptors.response.use(function (res) {
+        // debugger
+        // uni.hideLoading();
+        var data = res.data;
+        // console.log("请求获取data", data)
+        if (data) {
+          //console.log('data=============', data)
+          return Promise.resolve(data);
+        } else {
+          Promise.resolve(null);
+        }
+      }, function (err) {
+        console.error("axios报错", err);
+        // debugger
+        // uni.hideLoading();
+        return Promise.reject(err);
+      });
+    }
+  }]);
+  return HttpRequest;
+}();
+var _default = new HttpRequest();
+exports.default = _default;
+
+/***/ }),
+/* 75 */
 /*!***********************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/index.js ***!
   \***********************************************************************************/
@@ -13238,7 +13658,7 @@ Object.defineProperty(exports, "default", {
   }
 });
 exports.toFormData = exports.spread = exports.mergeConfig = exports.isCancel = exports.isAxiosError = exports.getAdapter = exports.formToJSON = void 0;
-var _axios = _interopRequireDefault(__webpack_require__(/*! ./lib/axios.js */ 72));
+var _axios = _interopRequireDefault(__webpack_require__(/*! ./lib/axios.js */ 76));
 // This module is intended to unwrap Axios default export as named.
 // Keep top-level export same with static properties
 // so that it can keep same with es module or cjs
@@ -13276,7 +13696,7 @@ exports.AxiosError = AxiosError;
 exports.Axios = Axios;
 
 /***/ }),
-/* 72 */
+/* 76 */
 /*!***************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/axios.js ***!
   \***************************************************************************************/
@@ -13291,23 +13711,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./utils.js */ 73));
-var _bind = _interopRequireDefault(__webpack_require__(/*! ./helpers/bind.js */ 74));
-var _Axios = _interopRequireDefault(__webpack_require__(/*! ./core/Axios.js */ 75));
-var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./core/mergeConfig.js */ 111));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./defaults/index.js */ 88));
-var _formDataToJSON = _interopRequireDefault(__webpack_require__(/*! ./helpers/formDataToJSON.js */ 96));
-var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ./cancel/CanceledError.js */ 100));
-var _CancelToken = _interopRequireDefault(__webpack_require__(/*! ./cancel/CancelToken.js */ 114));
-var _isCancel = _interopRequireDefault(__webpack_require__(/*! ./cancel/isCancel.js */ 99));
-var _data = __webpack_require__(/*! ./env/data.js */ 113);
-var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./helpers/toFormData.js */ 78));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ./core/AxiosError.js */ 83));
-var _spread = _interopRequireDefault(__webpack_require__(/*! ./helpers/spread.js */ 115));
-var _isAxiosError = _interopRequireDefault(__webpack_require__(/*! ./helpers/isAxiosError.js */ 116));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./core/AxiosHeaders.js */ 97));
-var _adapters = _interopRequireDefault(__webpack_require__(/*! ./adapters/adapters.js */ 101));
-var _HttpStatusCode = _interopRequireDefault(__webpack_require__(/*! ./helpers/HttpStatusCode.js */ 117));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./utils.js */ 77));
+var _bind = _interopRequireDefault(__webpack_require__(/*! ./helpers/bind.js */ 78));
+var _Axios = _interopRequireDefault(__webpack_require__(/*! ./core/Axios.js */ 79));
+var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./core/mergeConfig.js */ 115));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./defaults/index.js */ 92));
+var _formDataToJSON = _interopRequireDefault(__webpack_require__(/*! ./helpers/formDataToJSON.js */ 100));
+var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ./cancel/CanceledError.js */ 104));
+var _CancelToken = _interopRequireDefault(__webpack_require__(/*! ./cancel/CancelToken.js */ 118));
+var _isCancel = _interopRequireDefault(__webpack_require__(/*! ./cancel/isCancel.js */ 103));
+var _data = __webpack_require__(/*! ./env/data.js */ 117);
+var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./helpers/toFormData.js */ 82));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ./core/AxiosError.js */ 87));
+var _spread = _interopRequireDefault(__webpack_require__(/*! ./helpers/spread.js */ 119));
+var _isAxiosError = _interopRequireDefault(__webpack_require__(/*! ./helpers/isAxiosError.js */ 120));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./core/AxiosHeaders.js */ 101));
+var _adapters = _interopRequireDefault(__webpack_require__(/*! ./adapters/adapters.js */ 105));
+var _HttpStatusCode = _interopRequireDefault(__webpack_require__(/*! ./helpers/HttpStatusCode.js */ 121));
 /**
  * Create an instance of Axios
  *
@@ -13379,7 +13799,7 @@ var _default = axios;
 exports.default = _default;
 
 /***/ }),
-/* 73 */
+/* 77 */
 /*!***************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/utils.js ***!
   \***************************************************************************************/
@@ -13395,7 +13815,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var _bind = _interopRequireDefault(__webpack_require__(/*! ./helpers/bind.js */ 74));
+var _bind = _interopRequireDefault(__webpack_require__(/*! ./helpers/bind.js */ 78));
 // utils is a library of generic helper functions non-specific to axios
 
 var toString = Object.prototype.toString;
@@ -14092,7 +14512,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 74 */
+/* 78 */
 /*!**********************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/bind.js ***!
   \**********************************************************************************************/
@@ -14113,7 +14533,7 @@ function bind(fn, thisArg) {
 }
 
 /***/ }),
-/* 75 */
+/* 79 */
 /*!********************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/core/Axios.js ***!
   \********************************************************************************************/
@@ -14130,14 +14550,14 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 73));
-var _buildURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/buildURL.js */ 76));
-var _InterceptorManager = _interopRequireDefault(__webpack_require__(/*! ./InterceptorManager.js */ 85));
-var _dispatchRequest = _interopRequireDefault(__webpack_require__(/*! ./dispatchRequest.js */ 86));
-var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./mergeConfig.js */ 111));
-var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ./buildFullPath.js */ 105));
-var _validator = _interopRequireDefault(__webpack_require__(/*! ../helpers/validator.js */ 112));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./AxiosHeaders.js */ 97));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 77));
+var _buildURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/buildURL.js */ 80));
+var _InterceptorManager = _interopRequireDefault(__webpack_require__(/*! ./InterceptorManager.js */ 89));
+var _dispatchRequest = _interopRequireDefault(__webpack_require__(/*! ./dispatchRequest.js */ 90));
+var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./mergeConfig.js */ 115));
+var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ./buildFullPath.js */ 109));
+var _validator = _interopRequireDefault(__webpack_require__(/*! ../helpers/validator.js */ 116));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./AxiosHeaders.js */ 101));
 var validators = _validator.default.validators;
 
 /**
@@ -14306,7 +14726,7 @@ var _default = Axios;
 exports.default = _default;
 
 /***/ }),
-/* 76 */
+/* 80 */
 /*!**************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/buildURL.js ***!
   \**************************************************************************************************/
@@ -14321,8 +14741,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = buildURL;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
-var _AxiosURLSearchParams = _interopRequireDefault(__webpack_require__(/*! ../helpers/AxiosURLSearchParams.js */ 77));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
+var _AxiosURLSearchParams = _interopRequireDefault(__webpack_require__(/*! ../helpers/AxiosURLSearchParams.js */ 81));
 /**
  * It replaces all instances of the characters `:`, `$`, `,`, `+`, `[`, and `]` with their
  * URI encoded counterparts
@@ -14368,7 +14788,7 @@ function buildURL(url, params, options) {
 }
 
 /***/ }),
-/* 77 */
+/* 81 */
 /*!**************************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/AxiosURLSearchParams.js ***!
   \**************************************************************************************************************/
@@ -14383,7 +14803,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./toFormData.js */ 78));
+var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./toFormData.js */ 82));
 /**
  * It encodes a string by replacing all characters that are not in the unreserved set with
  * their percent-encoded equivalents
@@ -14435,7 +14855,7 @@ var _default = AxiosURLSearchParams;
 exports.default = _default;
 
 /***/ }),
-/* 78 */
+/* 82 */
 /*!****************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/toFormData.js ***!
   \****************************************************************************************************/
@@ -14451,9 +14871,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 83));
-var _FormData = _interopRequireDefault(__webpack_require__(/*! ../platform/node/classes/FormData.js */ 84));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 87));
+var _FormData = _interopRequireDefault(__webpack_require__(/*! ../platform/node/classes/FormData.js */ 88));
 // temporary hotfix to avoid circular references until AxiosURLSearchParams is refactored
 
 /**
@@ -14637,10 +15057,10 @@ function toFormData(obj, formData, options) {
 }
 var _default = toFormData;
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/buffer/index.js */ 79).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/buffer/index.js */ 83).Buffer))
 
 /***/ }),
-/* 79 */
+/* 83 */
 /*!**************************************!*\
   !*** ./node_modules/buffer/index.js ***!
   \**************************************/
@@ -14658,9 +15078,9 @@ exports.default = _default;
 
 
 
-var base64 = __webpack_require__(/*! base64-js */ 80)
-var ieee754 = __webpack_require__(/*! ieee754 */ 81)
-var isArray = __webpack_require__(/*! isarray */ 82)
+var base64 = __webpack_require__(/*! base64-js */ 84)
+var ieee754 = __webpack_require__(/*! ieee754 */ 85)
+var isArray = __webpack_require__(/*! isarray */ 86)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -16441,7 +16861,7 @@ function isnan (val) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 80 */
+/* 84 */
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
   \*****************************************/
@@ -16602,7 +17022,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 81 */
+/* 85 */
 /*!***************************************!*\
   !*** ./node_modules/ieee754/index.js ***!
   \***************************************/
@@ -16697,7 +17117,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 82 */
+/* 86 */
 /*!***************************************!*\
   !*** ./node_modules/isarray/index.js ***!
   \***************************************/
@@ -16712,7 +17132,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 83 */
+/* 87 */
 /*!*************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/core/AxiosError.js ***!
   \*************************************************************************************************/
@@ -16727,7 +17147,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
 /**
  * Create an Error with the specified message, config, error code, request and response.
  *
@@ -16806,7 +17226,7 @@ var _default = AxiosError;
 exports.default = _default;
 
 /***/ }),
-/* 84 */
+/* 88 */
 /*!**********************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/null.js ***!
   \**********************************************************************************************/
@@ -16825,7 +17245,7 @@ var _default = null;
 exports.default = _default;
 
 /***/ }),
-/* 85 */
+/* 89 */
 /*!*********************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/core/InterceptorManager.js ***!
   \*********************************************************************************************************/
@@ -16842,7 +17262,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 73));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 77));
 var InterceptorManager = /*#__PURE__*/function () {
   function InterceptorManager() {
     (0, _classCallCheck2.default)(this, InterceptorManager);
@@ -16923,7 +17343,7 @@ var _default = InterceptorManager;
 exports.default = _default;
 
 /***/ }),
-/* 86 */
+/* 90 */
 /*!******************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/core/dispatchRequest.js ***!
   \******************************************************************************************************/
@@ -16938,12 +17358,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = dispatchRequest;
-var _transformData = _interopRequireDefault(__webpack_require__(/*! ./transformData.js */ 87));
-var _isCancel = _interopRequireDefault(__webpack_require__(/*! ../cancel/isCancel.js */ 99));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../defaults/index.js */ 88));
-var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ../cancel/CanceledError.js */ 100));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 97));
-var _adapters = _interopRequireDefault(__webpack_require__(/*! ../adapters/adapters.js */ 101));
+var _transformData = _interopRequireDefault(__webpack_require__(/*! ./transformData.js */ 91));
+var _isCancel = _interopRequireDefault(__webpack_require__(/*! ../cancel/isCancel.js */ 103));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../defaults/index.js */ 92));
+var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ../cancel/CanceledError.js */ 104));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 101));
+var _adapters = _interopRequireDefault(__webpack_require__(/*! ../adapters/adapters.js */ 105));
 /**
  * Throws a `CanceledError` if cancellation has been requested.
  *
@@ -16999,7 +17419,7 @@ function dispatchRequest(config) {
 }
 
 /***/ }),
-/* 87 */
+/* 91 */
 /*!****************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/core/transformData.js ***!
   \****************************************************************************************************/
@@ -17014,9 +17434,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = transformData;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 73));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../defaults/index.js */ 88));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 97));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 77));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../defaults/index.js */ 92));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 101));
 /**
  * Transform the data for a request or a response
  *
@@ -17038,7 +17458,7 @@ function transformData(fns, response) {
 }
 
 /***/ }),
-/* 88 */
+/* 92 */
 /*!************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/defaults/index.js ***!
   \************************************************************************************************/
@@ -17053,13 +17473,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 83));
-var _transitional = _interopRequireDefault(__webpack_require__(/*! ./transitional.js */ 89));
-var _toFormData = _interopRequireDefault(__webpack_require__(/*! ../helpers/toFormData.js */ 78));
-var _toURLEncodedForm = _interopRequireDefault(__webpack_require__(/*! ../helpers/toURLEncodedForm.js */ 90));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 91));
-var _formDataToJSON = _interopRequireDefault(__webpack_require__(/*! ../helpers/formDataToJSON.js */ 96));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 87));
+var _transitional = _interopRequireDefault(__webpack_require__(/*! ./transitional.js */ 93));
+var _toFormData = _interopRequireDefault(__webpack_require__(/*! ../helpers/toFormData.js */ 82));
+var _toURLEncodedForm = _interopRequireDefault(__webpack_require__(/*! ../helpers/toURLEncodedForm.js */ 94));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 95));
+var _formDataToJSON = _interopRequireDefault(__webpack_require__(/*! ../helpers/formDataToJSON.js */ 100));
 /**
  * It takes a string, tries to parse it, and if it fails, it returns the stringified version
  * of the input
@@ -17178,7 +17598,7 @@ var _default = defaults;
 exports.default = _default;
 
 /***/ }),
-/* 89 */
+/* 93 */
 /*!*******************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/defaults/transitional.js ***!
   \*******************************************************************************************************/
@@ -17200,7 +17620,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 90 */
+/* 94 */
 /*!**********************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/toURLEncodedForm.js ***!
   \**********************************************************************************************************/
@@ -17215,9 +17635,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = toURLEncodedForm;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
-var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./toFormData.js */ 78));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 91));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
+var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./toFormData.js */ 82));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 95));
 function toURLEncodedForm(data, options) {
   return (0, _toFormData.default)(data, new _index.default.classes.URLSearchParams(), Object.assign({
     visitor: function visitor(value, key, path, helpers) {
@@ -17231,7 +17651,7 @@ function toURLEncodedForm(data, options) {
 }
 
 /***/ }),
-/* 91 */
+/* 95 */
 /*!************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/platform/index.js ***!
   \************************************************************************************************/
@@ -17251,10 +17671,10 @@ Object.defineProperty(exports, "default", {
     return _index.default;
   }
 });
-var _index = _interopRequireDefault(__webpack_require__(/*! ./node/index.js */ 92));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./node/index.js */ 96));
 
 /***/ }),
-/* 92 */
+/* 96 */
 /*!********************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/platform/browser/index.js ***!
   \********************************************************************************************************/
@@ -17269,9 +17689,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _URLSearchParams = _interopRequireDefault(__webpack_require__(/*! ./classes/URLSearchParams.js */ 93));
-var _FormData = _interopRequireDefault(__webpack_require__(/*! ./classes/FormData.js */ 94));
-var _Blob = _interopRequireDefault(__webpack_require__(/*! ./classes/Blob.js */ 95));
+var _URLSearchParams = _interopRequireDefault(__webpack_require__(/*! ./classes/URLSearchParams.js */ 97));
+var _FormData = _interopRequireDefault(__webpack_require__(/*! ./classes/FormData.js */ 98));
+var _Blob = _interopRequireDefault(__webpack_require__(/*! ./classes/Blob.js */ 99));
 /**
  * Determine if we're running in a standard browser environment
  *
@@ -17325,7 +17745,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 93 */
+/* 97 */
 /*!**************************************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/platform/browser/classes/URLSearchParams.js ***!
   \**************************************************************************************************************************/
@@ -17340,12 +17760,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _AxiosURLSearchParams = _interopRequireDefault(__webpack_require__(/*! ../../../helpers/AxiosURLSearchParams.js */ 77));
+var _AxiosURLSearchParams = _interopRequireDefault(__webpack_require__(/*! ../../../helpers/AxiosURLSearchParams.js */ 81));
 var _default = typeof URLSearchParams !== 'undefined' ? URLSearchParams : _AxiosURLSearchParams.default;
 exports.default = _default;
 
 /***/ }),
-/* 94 */
+/* 98 */
 /*!*******************************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/platform/browser/classes/FormData.js ***!
   \*******************************************************************************************************************/
@@ -17363,7 +17783,7 @@ var _default = typeof FormData !== 'undefined' ? FormData : null;
 exports.default = _default;
 
 /***/ }),
-/* 95 */
+/* 99 */
 /*!***************************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/platform/browser/classes/Blob.js ***!
   \***************************************************************************************************************/
@@ -17381,7 +17801,7 @@ var _default = typeof Blob !== 'undefined' ? Blob : null;
 exports.default = _default;
 
 /***/ }),
-/* 96 */
+/* 100 */
 /*!********************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/formDataToJSON.js ***!
   \********************************************************************************************************/
@@ -17396,7 +17816,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
 /**
  * It takes a string like `foo[x][y][z]` and returns an array like `['foo', 'x', 'y', 'z']
  *
@@ -17477,7 +17897,7 @@ var _default = formDataToJSON;
 exports.default = _default;
 
 /***/ }),
-/* 97 */
+/* 101 */
 /*!***************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/core/AxiosHeaders.js ***!
   \***************************************************************************************************/
@@ -17495,8 +17915,8 @@ exports.default = void 0;
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
-var _parseHeaders = _interopRequireDefault(__webpack_require__(/*! ../helpers/parseHeaders.js */ 98));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
+var _parseHeaders = _interopRequireDefault(__webpack_require__(/*! ../helpers/parseHeaders.js */ 102));
 var $internals = Symbol('internals');
 function normalizeHeader(header) {
   return header && String(header).trim().toLowerCase();
@@ -17771,7 +18191,7 @@ var _default = AxiosHeaders;
 exports.default = _default;
 
 /***/ }),
-/* 98 */
+/* 102 */
 /*!******************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/parseHeaders.js ***!
   \******************************************************************************************************/
@@ -17786,7 +18206,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 73));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 77));
 // RawAxiosHeaders whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
 var ignoreDuplicateOf = _utils.default.toObjectSet(['age', 'authorization', 'content-length', 'content-type', 'etag', 'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since', 'last-modified', 'location', 'max-forwards', 'proxy-authorization', 'referer', 'retry-after', 'user-agent']);
@@ -17832,7 +18252,7 @@ var _default = function _default(rawHeaders) {
 exports.default = _default;
 
 /***/ }),
-/* 99 */
+/* 103 */
 /*!*************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/cancel/isCancel.js ***!
   \*************************************************************************************************/
@@ -17851,7 +18271,7 @@ function isCancel(value) {
 }
 
 /***/ }),
-/* 100 */
+/* 104 */
 /*!******************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/cancel/CanceledError.js ***!
   \******************************************************************************************************/
@@ -17866,8 +18286,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 83));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 87));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
 /**
  * A `CanceledError` is an object that is thrown when an operation is canceled.
  *
@@ -17889,7 +18309,7 @@ var _default = CanceledError;
 exports.default = _default;
 
 /***/ }),
-/* 101 */
+/* 105 */
 /*!***************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/adapters/adapters.js ***!
   \***************************************************************************************************/
@@ -17905,10 +18325,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
-var _http = _interopRequireDefault(__webpack_require__(/*! ./http.js */ 84));
-var _xhr = _interopRequireDefault(__webpack_require__(/*! ./xhr.js */ 102));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 83));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
+var _http = _interopRequireDefault(__webpack_require__(/*! ./http.js */ 88));
+var _xhr = _interopRequireDefault(__webpack_require__(/*! ./xhr.js */ 106));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 87));
 var knownAdapters = {
   http: _http.default,
   xhr: _xhr.default
@@ -17973,7 +18393,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 102 */
+/* 106 */
 /*!**********************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/adapters/xhr.js ***!
   \**********************************************************************************************/
@@ -17988,19 +18408,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 73));
-var _settle = _interopRequireDefault(__webpack_require__(/*! ./../core/settle.js */ 103));
-var _cookies = _interopRequireDefault(__webpack_require__(/*! ./../helpers/cookies.js */ 104));
-var _buildURL = _interopRequireDefault(__webpack_require__(/*! ./../helpers/buildURL.js */ 76));
-var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ../core/buildFullPath.js */ 105));
-var _isURLSameOrigin = _interopRequireDefault(__webpack_require__(/*! ./../helpers/isURLSameOrigin.js */ 108));
-var _transitional = _interopRequireDefault(__webpack_require__(/*! ../defaults/transitional.js */ 89));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 83));
-var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ../cancel/CanceledError.js */ 100));
-var _parseProtocol = _interopRequireDefault(__webpack_require__(/*! ../helpers/parseProtocol.js */ 109));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 91));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 97));
-var _speedometer2 = _interopRequireDefault(__webpack_require__(/*! ../helpers/speedometer.js */ 110));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 77));
+var _settle = _interopRequireDefault(__webpack_require__(/*! ./../core/settle.js */ 107));
+var _cookies = _interopRequireDefault(__webpack_require__(/*! ./../helpers/cookies.js */ 108));
+var _buildURL = _interopRequireDefault(__webpack_require__(/*! ./../helpers/buildURL.js */ 80));
+var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ../core/buildFullPath.js */ 109));
+var _isURLSameOrigin = _interopRequireDefault(__webpack_require__(/*! ./../helpers/isURLSameOrigin.js */ 112));
+var _transitional = _interopRequireDefault(__webpack_require__(/*! ../defaults/transitional.js */ 93));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 87));
+var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ../cancel/CanceledError.js */ 104));
+var _parseProtocol = _interopRequireDefault(__webpack_require__(/*! ../helpers/parseProtocol.js */ 113));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 95));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 101));
+var _speedometer2 = _interopRequireDefault(__webpack_require__(/*! ../helpers/speedometer.js */ 114));
 function progressEventReducer(listener, isDownloadStream) {
   var bytesNotified = 0;
   var _speedometer = (0, _speedometer2.default)(50, 250);
@@ -18215,7 +18635,7 @@ var _default = isXHRAdapterSupported && function (config) {
 exports.default = _default;
 
 /***/ }),
-/* 103 */
+/* 107 */
 /*!*********************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/core/settle.js ***!
   \*********************************************************************************************/
@@ -18230,7 +18650,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = settle;
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ./AxiosError.js */ 83));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ./AxiosError.js */ 87));
 /**
  * Resolve or reject a Promise based on response status.
  *
@@ -18250,7 +18670,7 @@ function settle(resolve, reject, response) {
 }
 
 /***/ }),
-/* 104 */
+/* 108 */
 /*!*************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/cookies.js ***!
   \*************************************************************************************************/
@@ -18265,8 +18685,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 73));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 91));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 77));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 95));
 var _default = _index.default.isStandardBrowserEnv ?
 // Standard browser envs support document.cookie
 function standardBrowserEnv() {
@@ -18310,7 +18730,7 @@ function nonStandardBrowserEnv() {
 exports.default = _default;
 
 /***/ }),
-/* 105 */
+/* 109 */
 /*!****************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/core/buildFullPath.js ***!
   \****************************************************************************************************/
@@ -18325,8 +18745,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = buildFullPath;
-var _isAbsoluteURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/isAbsoluteURL.js */ 106));
-var _combineURLs = _interopRequireDefault(__webpack_require__(/*! ../helpers/combineURLs.js */ 107));
+var _isAbsoluteURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/isAbsoluteURL.js */ 110));
+var _combineURLs = _interopRequireDefault(__webpack_require__(/*! ../helpers/combineURLs.js */ 111));
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,
  * only when the requestedURL is not already an absolute URL.
@@ -18345,7 +18765,7 @@ function buildFullPath(baseURL, requestedURL) {
 }
 
 /***/ }),
-/* 106 */
+/* 110 */
 /*!*******************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
   \*******************************************************************************************************/
@@ -18374,7 +18794,7 @@ function isAbsoluteURL(url) {
 }
 
 /***/ }),
-/* 107 */
+/* 111 */
 /*!*****************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/combineURLs.js ***!
   \*****************************************************************************************************/
@@ -18401,7 +18821,7 @@ function combineURLs(baseURL, relativeURL) {
 }
 
 /***/ }),
-/* 108 */
+/* 112 */
 /*!*********************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
   \*********************************************************************************************************/
@@ -18416,8 +18836,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 73));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 91));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 77));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 95));
 var _default = _index.default.isStandardBrowserEnv ?
 // Standard browser envs have full support of the APIs needed to test
 // whether the request URL is of the same origin as current location.
@@ -18475,7 +18895,7 @@ function nonStandardBrowserEnv() {
 exports.default = _default;
 
 /***/ }),
-/* 109 */
+/* 113 */
 /*!*******************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/parseProtocol.js ***!
   \*******************************************************************************************************/
@@ -18495,7 +18915,7 @@ function parseProtocol(url) {
 }
 
 /***/ }),
-/* 110 */
+/* 114 */
 /*!*****************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/speedometer.js ***!
   \*****************************************************************************************************/
@@ -18552,7 +18972,7 @@ var _default = speedometer;
 exports.default = _default;
 
 /***/ }),
-/* 111 */
+/* 115 */
 /*!**************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/core/mergeConfig.js ***!
   \**************************************************************************************************/
@@ -18567,8 +18987,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = mergeConfig;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 73));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./AxiosHeaders.js */ 97));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 77));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./AxiosHeaders.js */ 101));
 var headersToObject = function headersToObject(thing) {
   return thing instanceof _AxiosHeaders.default ? thing.toJSON() : thing;
 };
@@ -18673,7 +19093,7 @@ function mergeConfig(config1, config2) {
 }
 
 /***/ }),
-/* 112 */
+/* 116 */
 /*!***************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/validator.js ***!
   \***************************************************************************************************/
@@ -18689,8 +19109,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var _data = __webpack_require__(/*! ../env/data.js */ 113);
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 83));
+var _data = __webpack_require__(/*! ../env/data.js */ 117);
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 87));
 var validators = {};
 
 // eslint-disable-next-line func-names
@@ -18768,7 +19188,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 113 */
+/* 117 */
 /*!******************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/env/data.js ***!
   \******************************************************************************************/
@@ -18786,7 +19206,7 @@ var VERSION = "1.5.1";
 exports.VERSION = VERSION;
 
 /***/ }),
-/* 114 */
+/* 118 */
 /*!****************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/cancel/CancelToken.js ***!
   \****************************************************************************************************/
@@ -18803,7 +19223,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ./CanceledError.js */ 100));
+var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ./CanceledError.js */ 104));
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
  *
@@ -18922,7 +19342,7 @@ var _default = CancelToken;
 exports.default = _default;
 
 /***/ }),
-/* 115 */
+/* 119 */
 /*!************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/spread.js ***!
   \************************************************************************************************/
@@ -18964,7 +19384,7 @@ function spread(callback) {
 }
 
 /***/ }),
-/* 116 */
+/* 120 */
 /*!******************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/isAxiosError.js ***!
   \******************************************************************************************************/
@@ -18979,7 +19399,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = isAxiosError;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 73));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 77));
 /**
  * Determines whether the payload is an error thrown by Axios
  *
@@ -18992,7 +19412,7 @@ function isAxiosError(payload) {
 }
 
 /***/ }),
-/* 117 */
+/* 121 */
 /*!********************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/node_modules/axios/lib/helpers/HttpStatusCode.js ***!
   \********************************************************************************************************/
@@ -19083,179 +19503,153 @@ var _default = HttpStatusCode;
 exports.default = _default;
 
 /***/ }),
-/* 118 */
-/*!************************************************************************!*\
-  !*** /Users/apple/Documents/HBuilderProjects/uni_blp/src/api/axios.js ***!
-  \************************************************************************/
+/* 122 */
+/*!*****************************************************************************!*\
+  !*** /Users/apple/Documents/HBuilderProjects/uni_blp/src/api/uniRequest.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ 71));
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-// const {
-// 	develop,
-// 	release
-// } = require('@/config/url.js');
+exports.request = request;
+var _utils = __webpack_require__(/*! ../../src/utils/utils.js */ 67);
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../src/store/index.js */ 63));
+// https://www.pouyun.com/api.php?out=jsonp&wd=%E6%96%97%E7%BD%97%E5%A4%A7%E9%99%86&cb=jQuery18209932111059945175_1696425655406&_=1696425655434
+// https://www.pouyun.com/api.php?out=jsonp&flag=5&id=76060&cb=jQuery182006412466474693623_1696425683840&_=1696425684373
 
-// import cusHeader from '../config/requestConfig.js'
+// https://jx.qqwtt.com/api.php?out=jsonp&wd=%E6%96%97%E7%BD%97%E5%A4%A7%E9%99%86&cb=jQuery18202740543482104514_1696425761584&_=1696425761613
+// https://jx.qqwtt.com/api.php?out=jsonp&flag=7&id=64867&cb=jQuery18204477326097365393_1696425777538&_=1696425777946
 
-//根据环境变量获取api地址
-// https://vip.bljiex.com/api.php?out=jsonp&wd=%E5%85%89%E8%8D%A3%E6%97%B6%E4%BB%A3&cb=jQuery182044584402530265166_1694427316382&_=1694427316386
-// let url11 = develop.VIDEO_SEARCH_URL + "%E5%85%89%E8%8D%A3%E6%97%B6%E4%BB%A3" + develop.SUFFIX_URL;
-// https://vip.bljiex.com/api.php?out=jsonp&flag=3&id=16041&_=1693991493204
+// https://movie.heheda.top/api.php?out=jsonp&wd=%E6%96%97%E7%BD%97%E5%A4%A7%E9%99%86&cb=jQuery18208175995271188583_1696425900091&_=1696425900117
+// https://movie.heheda.top/api.php?out=jsonp&flag=0&id=75159&cb=jQuery182011813079058883935_1696425847228&_=1696425929604
 
-// https://jx.qqwtt.com/api.php?out=jsonp&wd=%E6%96%97%E7%BD%97%E5%A4%A7%E9%99%86&cb=jQuery18208780301663630536_1696307237202&_=1696307237233
-//	https://jx.qqwtt.com/
-//	https://movie.heheda.top/
-// 	https://www.pouyun.com/
-var baseURL = 'api/'; //https://jx.qqwtt.com/'//process.env.HOST + process.env.PORT && Number(process.env.PORT)// window.location.origin //'http://localhost:8082'
-// url: 'xiaomi.php?out=jsonp&wd=%E5%85%89%E8%8D%A3%E6%97%B6%E4%BB%A3',
-// axios.defaults.adapter = function(config) {
-//   return new Promise((resolve, reject) => {
-//       console.log(config)
-//       var settle = require('axios/lib/core/settle');
-//       var buildURL = require('axios/lib/helpers/buildURL');
-//       uni.request({
-//           method: config.method.toUpperCase(),
-//           url: config.baseURL + buildURL(config.url, config.params, config.paramsSerializer),
-//           header: config.headers,
-//           data: config.data,
-//           dataType: config.dataType,
-//           responseType: config.responseType,
-//           sslVerify: config.sslVerify,
-//           complete: function complete(response) {
-//               response = {
-//                   data: response.data,
-//                   status: response.statusCode,
-//                   errMsg: response.errMsg,
-//                   header: response.header,
-//                   config: config
-//               };
-
-//               settle(resolve, reject, response);
-//           }
-//       })
-//   })
-// }
-console.log("baseURL:", baseURL, "++++++++++++++++++++++++");
-var HttpRequest = /*#__PURE__*/function () {
-  function HttpRequest() {
-    (0, _classCallCheck2.default)(this, HttpRequest);
-    this.baseURL = baseURL; // 从环境变量中获取api地址
-    this.timeout = 300000;
+//'api/'//'https://jx.qqwtt.com/'//tmp.state.base_url//'https://jx.qqwtt.com/'
+// const BASE_URL = '/api'//'https://movie.heheda.top/'////'https://jx.qqwtt.com/'//tmp.state.base_url//'https://jx.qqwtt.com/'
+function request(requestUrl) {
+  var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
+  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var tmp = _index.default;
+  // debugger
+  var BASE_URL = tmp.state.base_url;
+  var _url = BASE_URL + requestUrl;
+  if (requestUrl.startsWith('http')) {
+    // debugger
+    _url = requestUrl;
   }
-  (0, _createClass2.default)(HttpRequest, [{
-    key: "mergeOptions",
-    value: function mergeOptions(options) {
-      return _objectSpread({
-        baseURL: baseURL,
-        timeout: 300000
-      }, options);
-    }
-  }, {
-    key: "request",
-    value: function request(options) {
-      var instance = _axios.default.create();
-      this.setInterceptors(instance);
-      var opts = this.mergeOptions(options);
-      return instance(opts);
-    }
-  }, {
-    key: "get",
-    value: function get(url) {
-      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var outHeaders = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      // console.log(data, "data+++++++++++++");
-      // debugger
-      // let _url = 'api/' + encodeURI(url)
-      var _url = encodeURI(url);
-      return this.request({
-        dataType: "json",
-        method: "get",
-        url: _url,
-        params: _objectSpread({}, data),
-        // get参数可以直接展开
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-          'Access-Control-Allow-Origin': '*'
-          // 'Content-Type':'application/x-www-form-urlencoded'
-        }
-      });
-    }
-  }, {
-    key: "post",
-    value: function post(url) {
-      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var outHeaders = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      // 请求体中 {}
-      // debugger
-      var _url = encodeURI(url);
-      return this.request({
-        method: "post",
-        url: _url,
-        data: data,
-        // post要求必须传入data属性
-        headers: {}
-      });
-    }
-    // 设置拦截器
-  }, {
-    key: "setInterceptors",
-    value: function setInterceptors(instance) {
-      // 请求拦截器
-      instance.interceptors.request.use(function (config) {
-        // config.withCredentials = true;
-        // uni.showLoading({
-        // 	title: '加载中...'
-        // })
-
-        config.headers['Access-Control-Allow-Origin'] = '*';
-        config.headers = _objectSpread({}, config.headers);
-        return config;
-      });
-      // 响应拦截器
-      instance.interceptors.response.use(function (res) {
-        // debugger
-        // uni.hideLoading();
+  // debugger
+  var url = encodeURI(_url);
+  console.log('request->url:', url);
+  tmp.state.loading = true;
+  // uni.showLoading({
+  // 	title:'加载中'
+  // })
+  console.log('loading:', tmp.state.loading);
+  return new Promise(function (resolve, reject) {
+    uni.request({
+      url: url,
+      method: method,
+      data: data,
+      //带token发送请求
+      header: {
+        // 	'x-token':getLocal('token')
+      },
+      success: function success(res) {
         var data = res.data;
-        // console.log("请求获取data", data)
-        if (data) {
-          //console.log('data=============', data)
-          return Promise.resolve(data);
-        } else {
-          Promise.resolve(null);
-        }
-      }, function (err) {
-        console.error("axios报错", err);
-        debugger;
-        // uni.hideLoading();
-        return Promise.reject(err);
-      });
-    }
-  }]);
-  return HttpRequest;
-}();
-var _default = new HttpRequest();
-exports.default = _default;
+        tmp.state.loading = false;
+        // uni.hideLoading()
+        resolve(data);
+      },
+      timeout: 50000,
+      complete: function complete(res) {
+        // uni.hideLoading()
+        tmp.state.loading = false;
+      },
+      fail: function fail(err) {
+        tmp.state.loading = false;
+        console.log('uni.request:' + err);
+        // uni.hideLoading()
+        reject(err);
+      }
+    });
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 119 */,
-/* 120 */,
-/* 121 */,
-/* 122 */,
-/* 123 */,
+/* 123 */
+/*!****************************************************************************!*\
+  !*** /Users/apple/Documents/HBuilderProjects/uni_blp/src/utils/storage.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.storage_get_hotSearch = storage_get_hotSearch;
+exports.storage_get_hotSearch_rank100 = storage_get_hotSearch_rank100;
+exports.storage_get_html = storage_get_html;
+exports.storage_save_hotSearch = storage_save_hotSearch;
+exports.storage_save_hotSearch_rank100 = storage_save_hotSearch_rank100;
+exports.storage_save_html = storage_save_html;
+var kHotSearch_html_key = "__kHotSearch_html_key__"; //html key
+var kHotSearch_key = "__kHotSearch_key__"; //热门搜索 key
+var kHotSearch_rank100_key = "__kHotSearch_rank100_key__"; //搜索排行榜100 key
+
+/* 保存html文档 */
+function storage_save_html(data) {
+  _saveData(kHotSearch_html_key, data);
+}
+
+/* 获取html文档 */
+function storage_get_html() {
+  _getData(kHotSearch_html_key);
+}
+
+/* 保存热门搜索 */
+function storage_save_hotSearch(data) {
+  // debugger
+  _saveData(kHotSearch_key, data);
+}
+
+/* 获取热门搜索 */
+function storage_get_hotSearch() {
+  // debugger
+  return _getData(kHotSearch_key);
+}
+
+/* 保存搜索排行榜100 */
+function storage_save_hotSearch_rank100(data) {
+  _saveData(kHotSearch_rank100_key, data);
+}
+
+/* 获取搜索排行榜100 */
+function storage_get_hotSearch_rank100() {
+  return _getData(kHotSearch_rank100_key);
+}
+function _saveData(key, data) {
+  uni.setStorageSync(key, data);
+}
+function _getData(key) {
+  return uni.getStorageSync(key);
+}
+
+/* 清空热门搜索 */
+function _clear_hotSearch() {
+  uni.clearStorageSync();
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
 /* 124 */,
 /* 125 */,
 /* 126 */,
@@ -19274,7 +19668,12 @@ exports.default = _default;
 /* 139 */,
 /* 140 */,
 /* 141 */,
-/* 142 */
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */
 /*!*************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/src/utils/time.js ***!
   \*************************************************************************/
@@ -19335,11 +19734,6 @@ function customParam_CB() {
 // }
 
 /***/ }),
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
 /* 148 */,
 /* 149 */,
 /* 150 */,
@@ -19396,27 +19790,7 @@ function customParam_CB() {
 /* 201 */,
 /* 202 */,
 /* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */
+/* 204 */
 /*!***********************************************************************************************************!*\
   !*** /Users/apple/Documents/HBuilderProjects/uni_blp/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \***********************************************************************************************************/

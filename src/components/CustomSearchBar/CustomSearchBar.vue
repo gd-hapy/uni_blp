@@ -200,7 +200,7 @@
 </script>
 
 <style lang="scss">
-	$searchbar-height: 36px;
+	$searchbar-height: 55px;
 
 	.searchbar {
 		/* #ifndef APP-NVUE */
@@ -250,6 +250,8 @@
 
 	.searchbar__button {
 		width: 60px;
+		height: $searchbar-height;
+		line-height: $searchbar-height;
 		font-size: 14px;
 		position: relative;
 		background-color: SeaGreen;

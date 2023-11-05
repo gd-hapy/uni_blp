@@ -27,7 +27,7 @@
 	   // justify-content: center;
 	   margin-top: 50px;
 	   align-items: center;
-	   z-index: 999999;
+	   z-index: 999;
 	   .loading-img{
 		   width:300rpx;
 		   height:40rpx;

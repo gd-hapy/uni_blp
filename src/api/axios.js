@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '../store/index.js'
 
 // const {
 // 	develop,
@@ -18,36 +19,38 @@ import axios from 'axios';
 //	https://jx.qqwtt.com/
 //	https://movie.heheda.top/
 // 	https://www.pouyun.com/
-let baseURL = 'api/'//https://jx.qqwtt.com/'//process.env.HOST + process.env.PORT && Number(process.env.PORT)// window.location.origin //'http://localhost:8082'
-// url: 'xiaomi.php?out=jsonp&wd=%E5%85%89%E8%8D%A3%E6%97%B6%E4%BB%A3',
-// axios.defaults.adapter = function(config) {
-//   return new Promise((resolve, reject) => {
-//       console.log(config)
-//       var settle = require('axios/lib/core/settle');
-//       var buildURL = require('axios/lib/helpers/buildURL');
-//       uni.request({
-//           method: config.method.toUpperCase(),
-//           url: config.baseURL + buildURL(config.url, config.params, config.paramsSerializer),
-//           header: config.headers,
-//           data: config.data,
-//           dataType: config.dataType,
-//           responseType: config.responseType,
-//           sslVerify: config.sslVerify,
-//           complete: function complete(response) {
-//               response = {
-//                   data: response.data,
-//                   status: response.statusCode,
-//                   errMsg: response.errMsg,
-//                   header: response.header,
-//                   config: config
-//               };
+let tm = store
 
-//               settle(resolve, reject, response);
-//           }
-//       })
-//   })
+let baseURL = tm.state.base_url//'https://movie.heheda.top/'//'api/'///'https://jx.qqwtt.com/'//api/'//https://jx.qqwtt.com/'//process.env.HOST + process.env.PORT && Number(process.env.PORT)// window.location.origin //'http://localhost:8082'
+// url: 'xiaomi.php?out=jsonp&wd=%E5%85%89%E8%8D%A3%E6%97%B6%E4%BB%A3',
+
+// axios.defaults.adapter = function(config) {
+// 	return new Promise((resolve, reject) => {
+// 		var settle = require('../../node_modules/axios/lib/core/settle');
+// 		var buildURL = require('../../node_modules/axios/lib/helpers/buildURL');
+// 		uni.request({
+// 			method: config.method.toUpperCase(),
+// 			url: buildURL(config.url, config.params, config.paramsSerializer),
+// 			header: config.headers,
+// 			data: config.data,
+// 			dataType: config.dataType,
+// 			responseType: config.responseType,
+// 			sslVerify: config.sslVerify,
+// 			complete: function complete(response) {
+// 				response = {
+// 					data: response.data,
+// 					status: response.statusCode,
+// 					errMsg: response.errMsg,
+// 					header: response.header,
+// 					config: config
+// 				};
+// 				settle(resolve, reject, response);
+// 			}
+// 		})
+// 	})
 // }
 console.log("baseURL:", baseURL, "++++++++++++++++++++++++");
+// axios.defaults.adapter = require('axios/lib/adapters/xhr');
 class HttpRequest {
 	constructor() {
 		this.baseURL = baseURL; // 从环境变量中获取api地址
@@ -70,7 +73,9 @@ class HttpRequest {
 		// console.log(data, "data+++++++++++++");
 		// debugger
 		// let _url = 'api/' + encodeURI(url)
+		// this.baseURL = tm.state.base_url
 		let _url = encodeURI(url)
+		console.log('axios->requestUrl:', _url, tm.state.base_url)
 		return this.request({
 			dataType: "json",
 			method: "get",
@@ -129,7 +134,7 @@ class HttpRequest {
 			},
 			(err) => {
 				console.error("axios报错", err);
-				debugger
+				// debugger
 				// uni.hideLoading();
 				return Promise.reject(err);
 			}

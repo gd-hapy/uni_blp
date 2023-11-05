@@ -1,6 +1,6 @@
 <template>
-	<view class="CustomHotSearch">
-		<view class="Custom-preText">热门搜索：</view>
+	<view class="custom-hotSearch">
+		<view class="custom-preText">热门搜索：</view>
 		<block v-for="(item, index) in data" :key="index">
 			<view class="tag-view">
 				<CustomTag :text="item"  @click="handleClick"></CustomTag>
@@ -37,7 +37,7 @@
 </script>
 
 <style lang="scss">
-	.CustomHotSearch {
+	.custom-hotSearch {
 		/* #ifndef APP-PLUS-NVUE */
 		display: flex;
 		/* #endif */
@@ -47,12 +47,12 @@
 		flex-wrap: wrap;
 		margin: 30px;
 	}
-	.Custom-preText {
+	.custom-preText {
 		color: $uni-text-color-lightGreen;
 	}
 
 	.tag-view {
-		margin-right: 10px;
-		margin-top: 5px;
+		margin-right: 15px;
+		margin-top: 25px;
 	}
 </style>

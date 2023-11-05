@@ -1,8 +1,7 @@
 <template>
-	<view class="customViewContain">
+	<view class="custom-viewContain">
 		<view class="preText" :style="{color: preTextColor}">{{preText}}</view>
 		<view class="subText" :style="{color: subTextColor}" @click="clickHandle">{{subText}}</view>
-		
 	</view>
 </template>
 
@@ -14,7 +13,7 @@
 		props: {
 			preText: {
 				type: String,
-				default: '解析支持'
+				default: ''
 			},
 			preTextColor: {
 				type: String,
@@ -30,8 +29,7 @@
 			},
 		},
 		data() {
-			return {
-				
+			return {	
 			};
 		},
 		methods: {
@@ -44,7 +42,7 @@
 </script>
 
 <style lang="scss">
-	.customViewContain {
+	.custom-viewContain {
 		display: flex;
 		// flex-wrap: nowrap;
 		// flex-direction: row;
@@ -52,12 +50,15 @@
 		margin: 20px 20px 0 20px;
 	}
 	.preText {
-		font-size: 16px;
+		// font-size: 16px;
+		margin-top: 15px;
 		white-space: nowrap;
 		// margin-left: 20px;
 	}
 	.subText {
 		text-align: center;
+		margin-top: 15px;
+		margin-left: 5px;
 	}
 
 </style>
